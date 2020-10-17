@@ -30,10 +30,17 @@ class MainViewController: UIViewController {
         spinner.startAnimating()
         enterButtonView.isSelected = true
         self.model.checkAuth(login: login.text!, password: password.text!).done { (flag) in
-            //переход
+            switch flag{
+            case true:
+                let view = MapViewController(nibName: "MapViewController", bundle: nil)
+                self.present(view, animated: true, completion: nil)
+                
+            case false:
+                print("false")
+                //обработать случаи, когда присылается дичь
+                //алерт
+            }
             //сделать кнопку активной
-            
-            //обработать случаи, когда присылается дичь
         }
             
         }

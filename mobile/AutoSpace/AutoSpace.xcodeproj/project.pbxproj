@@ -19,10 +19,10 @@
 		EF647E3A253A4D510045861B /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF647E39253A4D510045861B /* MainModel.swift */; };
 		EF647E3F253A4F760045861B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF647E3E253A4F760045861B /* NetworkService.swift */; };
 		EF647E44253A50180045861B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF647E43253A50180045861B /* ProfileViewController.swift */; };
-		EF647E4C253A506B0045861B /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF647E4B253A506B0045861B /* Profile.storyboard */; };
 		EF647E55253A5C5A0045861B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF647E54253A5C5A0045861B /* NetworkManager.swift */; };
 		EF647E5B253A5D980045861B /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF647E5A253A5D980045861B /* NetworkRequest.swift */; };
-		EF647E74253AF0C00045861B /* RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF647E73253AF0C00045861B /* RequestData.swift */; };
+		EF647E74253AF0C00045861B /* ASRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF647E73253AF0C00045861B /* ASRequest.swift */; };
+		EF647E81253B14660045861B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF647E80253B14660045861B /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,10 +42,10 @@
 		EF647E39253A4D510045861B /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		EF647E3E253A4F760045861B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		EF647E43253A50180045861B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		EF647E4B253A506B0045861B /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		EF647E54253A5C5A0045861B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		EF647E5A253A5D980045861B /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
-		EF647E73253AF0C00045861B /* RequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestData.swift; sourceTree = "<group>"; };
+		EF647E73253AF0C00045861B /* ASRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASRequest.swift; sourceTree = "<group>"; };
+		EF647E80253B14660045861B /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,8 +100,10 @@
 			children = (
 				EF647E25253A3CE40045861B /* Main */,
 				EF647E47253A50200045861B /* Profile */,
+				EF647E84253B146A0045861B /* Map */,
 				EF647E41253A4F7C0045861B /* Network */,
 				EF647E49253A502B0045861B /* Data */,
+				EF647E0C253A28550045861B /* Main.storyboard */,
 				EF647E1C253A36CE0045861B /* Resourses */,
 			);
 			path = AutoSpace;
@@ -124,7 +126,6 @@
 			children = (
 				EF647E3C253A4D560045861B /* Interface */,
 				EF647E27253A3CF60045861B /* Controllers */,
-				EF647E0C253A28550045861B /* Main.storyboard */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -151,7 +152,7 @@
 				EF647E3E253A4F760045861B /* NetworkService.swift */,
 				EF647E54253A5C5A0045861B /* NetworkManager.swift */,
 				EF647E5A253A5D980045861B /* NetworkRequest.swift */,
-				EF647E73253AF0C00045861B /* RequestData.swift */,
+				EF647E73253AF0C00045861B /* ASRequest.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -160,7 +161,6 @@
 			isa = PBXGroup;
 			children = (
 				EF647E43253A50180045861B /* ProfileViewController.swift */,
-				EF647E4B253A506B0045861B /* Profile.storyboard */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -172,6 +172,14 @@
 				EF647E21253A3ADB0045861B /* User.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		EF647E84253B146A0045861B /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				EF647E80253B14660045861B /* MapViewController.swift */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,7 +243,6 @@
 			files = (
 				EF647E13253A28570045861B /* LaunchScreen.storyboard in Resources */,
 				EF647E10253A28570045861B /* Assets.xcassets in Resources */,
-				EF647E4C253A506B0045861B /* Profile.storyboard in Resources */,
 				EF647E0E253A28550045861B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,9 +303,10 @@
 				EF647E09253A28550045861B /* SceneDelegate.swift in Sources */,
 				EF647E22253A3ADB0045861B /* User.swift in Sources */,
 				EF647E1F253A3A6D0045861B /* Constant.swift in Sources */,
+				EF647E81253B14660045861B /* MapViewController.swift in Sources */,
 				EF647E5B253A5D980045861B /* NetworkRequest.swift in Sources */,
 				EF647E44253A50180045861B /* ProfileViewController.swift in Sources */,
-				EF647E74253AF0C00045861B /* RequestData.swift in Sources */,
+				EF647E74253AF0C00045861B /* ASRequest.swift in Sources */,
 				EF647E3F253A4F760045861B /* NetworkService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

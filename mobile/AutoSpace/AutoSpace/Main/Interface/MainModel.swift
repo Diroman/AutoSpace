@@ -15,10 +15,16 @@ class MainModel {
     func checkAuth(login: String, password: String) -> Promise<Bool>{
         return Promise{ promise in
         var res = false
-        network.getJson(url: Constant.authURL).done({ (json) in
-            res = true
-            promise.fulfill(true)
-        })
+        network.getJson(url: Constant.authURL).done({ (data) in
+            switch data.code{
+            case .access:
+                promise.fulfill(true)
+            case .error:
+                promise.fulfill(false)
+            }
+        }).catch { (error) in
+            promise.reject(error)
+        }
         
     }
     }

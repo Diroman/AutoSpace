@@ -12,20 +12,25 @@ import SwiftyJSON
 
 class NetworkService: NetworkManager {
     
-    func getJson(url: String) -> Promise<JSON> {
+    func getJson(url: String) -> Promise<ASRequest> {
         return Promise { [unowned self] promise in
-            let request = NetworkRequest.create(url: url, method: .get)
-            print("request")
-            print(request.url)
+            let request = NetworkRequest.login(url: url, method: .post, parameters: Constant.parameters)
             self.performRequest(request).done({ (data) in
-                print("1 \(data)")
-                guard let data = data else { throw NSError() }
-                guard let json: JSON = try? JSON(data: data) else { throw NSError() }
-                print(json)
-                promise.fulfill(json)
-            }).catch({ (error) in
-                promise.reject(error)
+                switch data.code{
+                case .access:
+                    print(data.data)
+                    parseJson()
+                    promise.fulfill(data)
+                case .error:
+                    promise.fulfill(data)
+                }
+               // promise.fulfill(json)
             })
+            
         }
+    }
+    
+    func parseJson(){
+        
     }
 }
