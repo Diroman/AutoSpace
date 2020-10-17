@@ -3,27 +3,49 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37AFFB8C07FB614FCEE3EB29 /* Pods_AutoSpace.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 927AB75D1AF50391D5B87268 /* Pods_AutoSpace.framework */; };
 		EF647E07253A28550045861B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF647E06253A28550045861B /* AppDelegate.swift */; };
 		EF647E09253A28550045861B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF647E08253A28550045861B /* SceneDelegate.swift */; };
-		EF647E0B253A28550045861B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF647E0A253A28550045861B /* ViewController.swift */; };
+		EF647E0B253A28550045861B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF647E0A253A28550045861B /* MainViewController.swift */; };
 		EF647E0E253A28550045861B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF647E0C253A28550045861B /* Main.storyboard */; };
 		EF647E10253A28570045861B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF647E0F253A28570045861B /* Assets.xcassets */; };
 		EF647E13253A28570045861B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF647E11253A28570045861B /* LaunchScreen.storyboard */; };
+		EF647E1F253A3A6D0045861B /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF647E1E253A3A6D0045861B /* Constant.swift */; };
+		EF647E22253A3ADB0045861B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF647E21253A3ADB0045861B /* User.swift */; };
+		EF647E3A253A4D510045861B /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF647E39253A4D510045861B /* MainModel.swift */; };
+		EF647E3F253A4F760045861B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF647E3E253A4F760045861B /* NetworkService.swift */; };
+		EF647E44253A50180045861B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF647E43253A50180045861B /* ProfileViewController.swift */; };
+		EF647E4C253A506B0045861B /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF647E4B253A506B0045861B /* Profile.storyboard */; };
+		EF647E55253A5C5A0045861B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF647E54253A5C5A0045861B /* NetworkManager.swift */; };
+		EF647E5B253A5D980045861B /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF647E5A253A5D980045861B /* NetworkRequest.swift */; };
+		EF647E74253AF0C00045861B /* RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF647E73253AF0C00045861B /* RequestData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5DC93852DEDA280DE37BE4B7 /* Pods-AutoSpace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoSpace.release.xcconfig"; path = "Target Support Files/Pods-AutoSpace/Pods-AutoSpace.release.xcconfig"; sourceTree = "<group>"; };
+		927AB75D1AF50391D5B87268 /* Pods_AutoSpace.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AutoSpace.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC94E8EDB8CA89275C828D0F /* Pods-AutoSpace.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoSpace.debug.xcconfig"; path = "Target Support Files/Pods-AutoSpace/Pods-AutoSpace.debug.xcconfig"; sourceTree = "<group>"; };
 		EF647E03253A28550045861B /* AutoSpace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoSpace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF647E06253A28550045861B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EF647E08253A28550045861B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		EF647E0A253A28550045861B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EF647E0A253A28550045861B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		EF647E0D253A28550045861B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EF647E0F253A28570045861B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EF647E12253A28570045861B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EF647E14253A28570045861B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF647E1E253A3A6D0045861B /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		EF647E21253A3ADB0045861B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		EF647E39253A4D510045861B /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
+		EF647E3E253A4F760045861B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		EF647E43253A50180045861B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		EF647E4B253A506B0045861B /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		EF647E54253A5C5A0045861B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		EF647E5A253A5D980045861B /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		EF647E73253AF0C00045861B /* RequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +53,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37AFFB8C07FB614FCEE3EB29 /* Pods_AutoSpace.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D0DEA6E45A892D8AEC778A9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DC94E8EDB8CA89275C828D0F /* Pods-AutoSpace.debug.xcconfig */,
+				5DC93852DEDA280DE37BE4B7 /* Pods-AutoSpace.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		6A3B6D9BDC92D14FA73E4FE1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				927AB75D1AF50391D5B87268 /* Pods_AutoSpace.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EF647DFA253A28550045861B = {
 			isa = PBXGroup;
 			children = (
 				EF647E05253A28550045861B /* AutoSpace */,
 				EF647E04253A28550045861B /* Products */,
+				3D0DEA6E45A892D8AEC778A9 /* Pods */,
+				6A3B6D9BDC92D14FA73E4FE1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +98,80 @@
 		EF647E05253A28550045861B /* AutoSpace */ = {
 			isa = PBXGroup;
 			children = (
+				EF647E25253A3CE40045861B /* Main */,
+				EF647E47253A50200045861B /* Profile */,
+				EF647E41253A4F7C0045861B /* Network */,
+				EF647E49253A502B0045861B /* Data */,
+				EF647E1C253A36CE0045861B /* Resourses */,
+			);
+			path = AutoSpace;
+			sourceTree = "<group>";
+		};
+		EF647E1C253A36CE0045861B /* Resourses */ = {
+			isa = PBXGroup;
+			children = (
 				EF647E06253A28550045861B /* AppDelegate.swift */,
 				EF647E08253A28550045861B /* SceneDelegate.swift */,
-				EF647E0A253A28550045861B /* ViewController.swift */,
-				EF647E0C253A28550045861B /* Main.storyboard */,
 				EF647E0F253A28570045861B /* Assets.xcassets */,
 				EF647E11253A28570045861B /* LaunchScreen.storyboard */,
 				EF647E14253A28570045861B /* Info.plist */,
 			);
-			path = AutoSpace;
+			path = Resourses;
+			sourceTree = "<group>";
+		};
+		EF647E25253A3CE40045861B /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				EF647E3C253A4D560045861B /* Interface */,
+				EF647E27253A3CF60045861B /* Controllers */,
+				EF647E0C253A28550045861B /* Main.storyboard */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		EF647E27253A3CF60045861B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EF647E0A253A28550045861B /* MainViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		EF647E3C253A4D560045861B /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				EF647E39253A4D510045861B /* MainModel.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		EF647E41253A4F7C0045861B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				EF647E3E253A4F760045861B /* NetworkService.swift */,
+				EF647E54253A5C5A0045861B /* NetworkManager.swift */,
+				EF647E5A253A5D980045861B /* NetworkRequest.swift */,
+				EF647E73253AF0C00045861B /* RequestData.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		EF647E47253A50200045861B /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				EF647E43253A50180045861B /* ProfileViewController.swift */,
+				EF647E4B253A506B0045861B /* Profile.storyboard */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		EF647E49253A502B0045861B /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				EF647E1E253A3A6D0045861B /* Constant.swift */,
+				EF647E21253A3ADB0045861B /* User.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +181,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EF647E17253A28570045861B /* Build configuration list for PBXNativeTarget "AutoSpace" */;
 			buildPhases = (
+				01162685217C379E3E66C749 /* [CP] Check Pods Manifest.lock */,
 				EF647DFF253A28550045861B /* Sources */,
 				EF647E00253A28550045861B /* Frameworks */,
 				EF647E01253A28550045861B /* Resources */,
+				196CC844BA439CD8A05490BB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -126,20 +235,71 @@
 			files = (
 				EF647E13253A28570045861B /* LaunchScreen.storyboard in Resources */,
 				EF647E10253A28570045861B /* Assets.xcassets in Resources */,
+				EF647E4C253A506B0045861B /* Profile.storyboard in Resources */,
 				EF647E0E253A28550045861B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		01162685217C379E3E66C749 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AutoSpace-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		196CC844BA439CD8A05490BB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AutoSpace/Pods-AutoSpace-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AutoSpace/Pods-AutoSpace-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AutoSpace/Pods-AutoSpace-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		EF647DFF253A28550045861B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF647E0B253A28550045861B /* ViewController.swift in Sources */,
+				EF647E55253A5C5A0045861B /* NetworkManager.swift in Sources */,
+				EF647E0B253A28550045861B /* MainViewController.swift in Sources */,
 				EF647E07253A28550045861B /* AppDelegate.swift in Sources */,
+				EF647E3A253A4D510045861B /* MainModel.swift in Sources */,
 				EF647E09253A28550045861B /* SceneDelegate.swift in Sources */,
+				EF647E22253A3ADB0045861B /* User.swift in Sources */,
+				EF647E1F253A3A6D0045861B /* Constant.swift in Sources */,
+				EF647E5B253A5D980045861B /* NetworkRequest.swift in Sources */,
+				EF647E44253A50180045861B /* ProfileViewController.swift in Sources */,
+				EF647E74253AF0C00045861B /* RequestData.swift in Sources */,
+				EF647E3F253A4F760045861B /* NetworkService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,12 +443,13 @@
 		};
 		EF647E18253A28570045861B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DC94E8EDB8CA89275C828D0F /* Pods-AutoSpace.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8BWQDHPFL8;
-				INFOPLIST_FILE = AutoSpace/Info.plist;
+				INFOPLIST_FILE = AutoSpace/Resourses/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -302,12 +463,13 @@
 		};
 		EF647E19253A28570045861B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5DC93852DEDA280DE37BE4B7 /* Pods-AutoSpace.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8BWQDHPFL8;
-				INFOPLIST_FILE = AutoSpace/Info.plist;
+				INFOPLIST_FILE = AutoSpace/Resourses/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
