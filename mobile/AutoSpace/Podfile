@@ -5,6 +5,7 @@ pod 'PromiseKit'
 pod 'Alamofire'
 pod 'KeychainSwift'
 pod 'SwiftyJSON'
+pod 'YandexMapsMobile', '4.0.0-full'
 end
 
 target 'AutoSpace' do
