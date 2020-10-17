@@ -9,6 +9,17 @@ type ConfigStruct struct {
 		Host string
 		Port int
 	}
+	GrpcApi struct {
+		Host string
+		Port int
+	}
+	Database struct {
+		Host     string
+		Port     int
+		Database string
+		User     string
+		Password string
+	}
 }
 
 var Config ConfigStruct

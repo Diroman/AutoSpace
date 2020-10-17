@@ -2,14 +2,20 @@ package main
 
 import (
 	"parking/config"
-	serverPac "parking/server"
+	"parking/internal/database"
+	"parking/internal/predictor"
+	serverPac "parking/internal/server"
 )
 
 func main() {
 	config.LoadConfig("config")
-	conf := config.Config
+	confServer := config.Config.Server
+	confDB := config.Config.Database
+	configPredict := config.Config.GrpcApi
 
-	server := serverPac.NewServer(conf.Server.Host, conf.Server.Port)
+	dbService := database.NewDatabase(confDB.Host, confDB.Port, confDB.Database, confDB.User, confDB.Password)
+	predictorService := predictor.NewPredictor(configPredict.Host, configPredict.Port)
+	server := serverPac.NewServer(confServer.Host, confServer.Port, dbService, predictorService)
 
 	server.Run()
 }
