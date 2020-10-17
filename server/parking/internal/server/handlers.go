@@ -2,10 +2,10 @@ package server
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 	"parking/internal/auth"
+	"parking/internal/spaceCounter"
 	"parking/internal/tools"
 	"parking/model"
 )
@@ -14,7 +14,7 @@ func (s *Server) SendFrame(w http.ResponseWriter, r *http.Request) {
 	body, closeFunc, err := tools.ReadRequestBodyJson(r, &model.InternalRequest{})
 	if err != nil {
 		log.Printf("Can`t read json body: %s", err)
-		w.WriteHeader(500)
+		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 
@@ -26,7 +26,9 @@ func (s *Server) SendFrame(w http.ResponseWriter, r *http.Request) {
 		log.Printf("Error to get prediction: %s\n", err)
 	}
 
-	fmt.Println(prediction)
+	log.Println(prediction)
+
+	log.Println(spaceCounter.SpaceCounter.GetSpaceCount(prediction))
 }
 
 func (s *Server) Login(w http.ResponseWriter, r *http.Request) {
@@ -77,7 +79,7 @@ func (s *Server) Login(w http.ResponseWriter, r *http.Request) {
 	}
 
 	user.Token = token
-	response.User = user
+	response.User = model.UserToUserResponse(user)
 
 	jsonResp, err := json.Marshal(response)
 	if err != nil {
@@ -89,7 +91,6 @@ func (s *Server) Login(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Write(jsonResp)
-	fmt.Println(jsonReq)
 }
 
 func LoggingMiddleware(next http.Handler) http.Handler {

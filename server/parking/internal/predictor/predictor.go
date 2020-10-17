@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"time"
 
 	"google.golang.org/grpc"
 
@@ -40,7 +41,9 @@ func (p *Predictor) CarDetector(image string) (model.Prediction, error) {
 	client := pb.NewCarDetectorClient(conn)
 
 	imageGrpc := &pb.Image{Image: image}
-	classes, err := client.Predict(context.Background(), imageGrpc)
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+
+	classes, err := client.Predict(ctx, imageGrpc)
 	if err != nil {
 		log.Printf("Error to get predict from best model: %s", err)
 		return model.Prediction{}, err

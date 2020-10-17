@@ -1,6 +1,7 @@
 package model
 
 import (
+	"math"
 	pb "parking/internal/api"
 )
 
@@ -9,8 +10,20 @@ type Point struct {
 	Y int
 }
 
-func (p Point) GetDir(p Point)  {
-	
+func (p Point) GetAngle(point Point) float64 {
+	diffY := point.Y - p.Y
+
+	c := p.GetDistance(point)
+	rad := math.Asin(float64(diffY) / c)
+
+	return 180 / math.Pi * rad
+}
+
+func (p Point) GetDistance(point Point) float64 {
+	diffX := point.X - p.X
+	diffY := point.Y - p.Y
+
+	return math.Sqrt(math.Pow(float64(diffX), 2) + math.Pow(float64(diffY), 2))
 }
 
 type Row struct {
@@ -18,6 +31,7 @@ type Row struct {
 	Area   int64
 	PointA Point
 	PointB Point
+	Middle Point
 }
 
 func (r Row) Equal(other Row) bool {
@@ -56,6 +70,10 @@ func PredictResponseToPrediction(resp *pb.Result) Prediction {
 				PointB: Point{
 					X: int(pointB.X),
 					Y: int(pointB.Y),
+				},
+				Middle: Point{
+					X: int((pointA.X + pointB.X) / 2),
+					Y: int((pointA.Y + pointB.Y) / 2),
 				},
 			}
 

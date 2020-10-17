@@ -1,9 +1,9 @@
 Server:
-  Host: "localhost"
+  Host: "0.0.0.0"
   Port: 8080
 
 GrpcApi:
-  Host: "192.168.31.55"
+  Host: "34.121.119.207"
   Port: 50051
 
 Database:

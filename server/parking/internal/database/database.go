@@ -25,7 +25,7 @@ const (
             END)                                    as address
 FROM users
          JOIN addresses a on a.id = users.address_id
-WHERE users.email = %s;`
+WHERE users.email = '%s';`
 )
 
 type Database struct {

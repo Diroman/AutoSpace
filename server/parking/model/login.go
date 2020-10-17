@@ -12,6 +12,6 @@ type LoginRequest struct {
 }
 
 type LoginResponse struct {
-	User User
+	User UserResponse
 	Err  string
 }
