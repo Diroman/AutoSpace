@@ -1,12 +1,17 @@
 package model
 
+type Coordinate struct {
+	Latitude  float32
+	Longitude float32
+}
+
 type LoginRequest struct {
-	Login    string
-	Password string
+	Login    string `json:"login"`
+	Password string `json:"password"`
+	Role     int    `json:"role"`
 }
 
 type LoginResponse struct {
-	// add user info
-	Token string
-	Err   string
+	User User
+	Err  string
 }

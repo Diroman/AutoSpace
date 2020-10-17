@@ -1,7 +1,14 @@
 Server:
-  Host: "0.0.0.0"
+  Host: "localhost"
   Port: 8080
 
 GrpcApi:
-  Host: "localhost"
+  Host: "192.168.31.55"
   Port: 50051
+
+Database:
+  Host: "localhost"
+  Port: 5432
+  Database: "postgres"
+  User: "postgres"
+  Password: "password"
