@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Map View Controller-->
+        <scene sceneID="Tzh-Wa-uoW">
+            <objects>
+                <viewController storyboardIdentifier="MapViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0VR-vN-56B" customClass="MapViewController" customModule="AutoSpace" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zGs-pO-HQe">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="33g-s6-WZm" customClass="YMKMapView">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fld-nY-WM6">
+                                <rect key="frame" x="30" y="740" width="80" height="80"/>
+                                <state key="normal" title="Button" image="home"/>
+                                <connections>
+                                    <action selector="findHome:" destination="0VR-vN-56B" eventType="touchUpInside" id="pTF-3z-d4H"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gbW-La-eRU">
+                                <rect key="frame" x="304" y="740" width="80" height="80"/>
+                                <state key="normal" title="Button" image="placeholder"/>
+                                <connections>
+                                    <action selector="findMe:" destination="0VR-vN-56B" eventType="touchUpInside" id="2SR-YM-Bfo"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="srw-5S-PE2"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="gbW-La-eRU" firstAttribute="width" secondItem="srw-5S-PE2" secondAttribute="width" multiplier="0.193237" id="9to-5W-efb"/>
+                            <constraint firstItem="Fld-nY-WM6" firstAttribute="height" secondItem="srw-5S-PE2" secondAttribute="height" multiplier="0.0977995" id="Ora-m0-avK"/>
+                            <constraint firstItem="srw-5S-PE2" firstAttribute="bottom" secondItem="Fld-nY-WM6" secondAttribute="bottom" constant="42" id="RMv-Zq-yUl"/>
+                            <constraint firstItem="Fld-nY-WM6" firstAttribute="width" secondItem="srw-5S-PE2" secondAttribute="width" multiplier="0.193237" id="TCq-7k-ueN"/>
+                            <constraint firstItem="srw-5S-PE2" firstAttribute="bottom" secondItem="gbW-La-eRU" secondAttribute="bottom" constant="42" id="TN9-97-t7g"/>
+                            <constraint firstItem="srw-5S-PE2" firstAttribute="trailing" secondItem="gbW-La-eRU" secondAttribute="trailing" constant="30" id="YWA-QA-8nQ"/>
+                            <constraint firstItem="gbW-La-eRU" firstAttribute="height" secondItem="srw-5S-PE2" secondAttribute="height" multiplier="0.0977995" id="fQs-Le-VJD"/>
+                            <constraint firstItem="Fld-nY-WM6" firstAttribute="leading" secondItem="srw-5S-PE2" secondAttribute="leading" constant="30" id="lvE-KQ-jSF"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="33g-s6-WZm" id="xRU-KC-xun"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q0e-2Q-rC0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="169.56521739130437" y="71.651785714285708"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="home" width="512" height="512"/>
+        <image name="placeholder" width="512" height="512"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

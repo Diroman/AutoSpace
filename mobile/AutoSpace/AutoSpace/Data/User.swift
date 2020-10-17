@@ -7,8 +7,17 @@
 
 import Foundation
 
+struct Address{
+    
+}
 
 
-class User: Codable {
+class User {
     var name: String
+    var homeAddress: Address
+    
+    init(name: String, homeAddress: Address){
+        self.name = name
+        self.homeAddress = homeAddress
+    }
 }

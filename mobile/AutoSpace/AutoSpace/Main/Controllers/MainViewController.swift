@@ -28,17 +28,26 @@ class MainViewController: UIViewController {
     
     @IBAction func enter(_ sender: UIButton) {
         spinner.startAnimating()
-        enterButtonView.isSelected = true
-        self.model.checkAuth(login: login.text!, password: password.text!).done { (flag) in
+        enterButtonView.isEnabled = false
+        loadingBackground.isHidden = false
+        self.model.checkAuth(login: login.text!, password: password.text!).done { [weak self] (flag) in
+            self?.enterButtonView.isEnabled = true
+            self?.loadingBackground.isHidden = true
+            self?.spinner.stopAnimating()
             switch flag{
             case true:
-                let view = MapViewController(nibName: "MapViewController", bundle: nil)
-                self.present(view, animated: true, completion: nil)
+                print("Df")
+               // let view = MapViewController(nibName: "MapViewController", bundle: nil)
+               // self?.present(view, animated: true, completion: nil)
                 
             case false:
                 print("false")
                 //обработать случаи, когда присылается дичь
                 //алерт
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Map", bundle:nil)
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
+                nextViewController.modalPresentationStyle = .fullScreen
+                self?.present(nextViewController, animated:true, completion:nil)
             }
             //сделать кнопку активной
         }
