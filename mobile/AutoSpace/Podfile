@@ -6,6 +6,7 @@ pod 'Alamofire'
 pod 'KeychainSwift'
 pod 'SwiftyJSON'
 pod 'YandexMapsMobile', '4.0.0-full'
+pod 'IQKeyboardManagerSwift'
 end
 
 target 'AutoSpace' do

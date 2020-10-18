@@ -14,9 +14,18 @@ class Constant{
     //static let authURL = "http://jsonplaceholder.typicode.com/posts"
     
     static let authURL = "http://192.168.31.44:8080/login"
+    static let sendCommentURL = "http://192.168.31.44:8080/send-email"
+    static let getSpotsURL = "http://192.168.31.44:8080/get-free-space"
     
     static var parameters: [String: String] = [
-        "login" : "erwe" ,
-        "password" : "werwer"
+        "login" : "" ,
+        "password" : ""
     ]
+    
+    static var sendParam: [String: Any] = [
+        "error_code" : 92 ,
+        "comment" : "huhu",
+        "email" : "hhaa"
+    ]
+    
 }

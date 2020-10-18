@@ -1,23 +1,24 @@
 //
-//  MainModel.swift
+//  SupportModel.swift
 //  AutoSpace
 //
-//  Created by andarbek on 17.10.2020.
+//  Created by andarbek on 18.10.2020.
 //
-
 import Foundation
 import PromiseKit
 
-class MainModel {
+class SupportModel {
     
     let network = NetworkService()
     
-    func checkAuth(login: String, password: String) -> Promise<ASRequest>{
+    func sendMess(errorCode: Int, comment: String, email: String) -> Promise<ASRequest>{
         return Promise{ promise in
         //var res = false
-        Constant.parameters["login"] = login
-        Constant.parameters["password"] = password
-        network.getJson(url: Constant.authURL).done({ (data) in
+            Constant.sendParam["error_code"] = errorCode
+            Constant.sendParam["comment"] = comment
+            Constant.sendParam["email"] = email
+            print(Constant.sendParam["comment"])
+            network.sendComment(url: Constant.sendCommentURL).done({ (data) in
             switch data.code{
             case .access:
                 promise.fulfill(data)

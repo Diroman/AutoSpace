@@ -7,17 +7,30 @@
 
 import Foundation
 
-struct Address{
-    
-}
 
 
 class User {
-    var name: String
-    var homeAddress: Address
+    var id: Int
+    var token: String
+    var username: String
+    var mobile: String
+    var address: String
+    var email: String
+    var addressCoord: Coordinate
+
     
-    init(name: String, homeAddress: Address){
-        self.name = name
-        self.homeAddress = homeAddress
+    init(id: Int, token: String, username: String, mobile: String, address: String ,email: String, coord: Coordinate){
+        self.id = id
+        self.token = token
+        self.username = username
+        self.mobile = mobile
+        self.address = address
+        self.email = email
+        self.addressCoord = coord
     }
+}
+
+struct Coordinate{
+    var latitude : Double
+    var longitude : Double
 }

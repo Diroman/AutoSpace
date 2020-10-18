@@ -7,6 +7,7 @@
 
 import UIKit
 import YandexMapsMobile
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         YMKMapKit.setApiKey(MAPKIT_API_KEY)
 
         YMKMapKit.setLocale("ru_RU")
+        IQKeyboardManager.shared.enable = true
         return true
     }
 

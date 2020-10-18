@@ -10,6 +10,9 @@
 		37AFFB8C07FB614FCEE3EB29 /* Pods_AutoSpace.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 927AB75D1AF50391D5B87268 /* Pods_AutoSpace.framework */; };
 		EF12417C253B25B800BFFBFE /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF12417B253B25B800BFFBFE /* Map.storyboard */; };
 		EF124188253B39E700BFFBFE /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF124187253B39E700BFFBFE /* Place.swift */; };
+		EF1B9F1C253BE590007D2F72 /* SupportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1B9F1B253BE590007D2F72 /* SupportModel.swift */; };
+		EF5360DB253BA68800AD9FDD /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5360DA253BA68800AD9FDD /* Extension.swift */; };
+		EF5360DE253BC00900AD9FDD /* SupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5360DD253BC00900AD9FDD /* SupportViewController.swift */; };
 		EF647E07253A28550045861B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF647E06253A28550045861B /* AppDelegate.swift */; };
 		EF647E09253A28550045861B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF647E08253A28550045861B /* SceneDelegate.swift */; };
 		EF647E0B253A28550045861B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF647E0A253A28550045861B /* MainViewController.swift */; };
@@ -33,6 +36,9 @@
 		DC94E8EDB8CA89275C828D0F /* Pods-AutoSpace.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoSpace.debug.xcconfig"; path = "Target Support Files/Pods-AutoSpace/Pods-AutoSpace.debug.xcconfig"; sourceTree = "<group>"; };
 		EF12417B253B25B800BFFBFE /* Map.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		EF124187253B39E700BFFBFE /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		EF1B9F1B253BE590007D2F72 /* SupportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportModel.swift; sourceTree = "<group>"; };
+		EF5360DA253BA68800AD9FDD /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		EF5360DD253BC00900AD9FDD /* SupportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportViewController.swift; sourceTree = "<group>"; };
 		EF647E03253A28550045861B /* AutoSpace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoSpace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF647E06253A28550045861B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EF647E08253A28550045861B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +87,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EF5360E0253BC00D00AD9FDD /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				EF5360DD253BC00900AD9FDD /* SupportViewController.swift */,
+				EF1B9F1B253BE590007D2F72 /* SupportModel.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
 		EF647DFA253A28550045861B = {
 			isa = PBXGroup;
 			children = (
@@ -104,10 +119,12 @@
 			children = (
 				EF647E25253A3CE40045861B /* Main */,
 				EF647E47253A50200045861B /* Profile */,
+				EF5360E0253BC00D00AD9FDD /* Support */,
 				EF647E84253B146A0045861B /* Map */,
 				EF647E41253A4F7C0045861B /* Network */,
 				EF647E49253A502B0045861B /* Data */,
 				EF647E1C253A36CE0045861B /* Resourses */,
+				EF5360DA253BA68800AD9FDD /* Extension.swift */,
 			);
 			path = AutoSpace;
 			sourceTree = "<group>";
@@ -329,7 +346,10 @@
 				EF647E09253A28550045861B /* SceneDelegate.swift in Sources */,
 				EF647E22253A3ADB0045861B /* User.swift in Sources */,
 				EF647E1F253A3A6D0045861B /* Constant.swift in Sources */,
+				EF5360DE253BC00900AD9FDD /* SupportViewController.swift in Sources */,
 				EF647E81253B14660045861B /* MapViewController.swift in Sources */,
+				EF5360DB253BA68800AD9FDD /* Extension.swift in Sources */,
+				EF1B9F1C253BE590007D2F72 /* SupportModel.swift in Sources */,
 				EF647E5B253A5D980045861B /* NetworkRequest.swift in Sources */,
 				EF647E44253A50180045861B /* ProfileViewController.swift in Sources */,
 				EF647E74253AF0C00045861B /* ASRequest.swift in Sources */,

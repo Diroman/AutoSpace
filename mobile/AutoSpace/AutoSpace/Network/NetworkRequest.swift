@@ -12,14 +12,14 @@ class NetworkRequest{
     
     var url: String!
     var headers: [String: String]!
-    var parameters: [String: String]!
+    var parameters: [String: Any]!
     var method: Alamofire.HTTPMethod!
     var encoding = JSONEncoding.default
     
     required init(url: String, method: Alamofire.HTTPMethod, encoding: JSONEncoding) {
         self.url = url
         self.headers = [String: String]()
-        self.parameters = [String: String]()
+        self.parameters = [String: Any]()
         self.method = method
         self.encoding = JSONEncoding.default
     }
@@ -33,6 +33,12 @@ class NetworkRequest{
     }
     
     class func login(url: String, method: Alamofire.HTTPMethod, parameters: [String: String]) -> Self {
+        let request = self.init(url: url, method: method, encoding: JSONEncoding.default)
+        request.withParam(param: parameters)
+        return request
+    }
+    
+    class func send(url: String, method: Alamofire.HTTPMethod, parameters: [String: Any]) -> Self {
         let request = self.init(url: url, method: method, encoding: JSONEncoding.default)
         request.withParam(param: parameters)
         return request
@@ -56,5 +62,10 @@ class NetworkRequest{
         return self
     }
     
+    @discardableResult
+    func withParam(param: [String: Any]) -> Self {
+        self.parameters = param
+        return self
+    }
     
 }
