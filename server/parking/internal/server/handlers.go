@@ -2,6 +2,7 @@ package server
 
 import (
 	"encoding/json"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"parking/internal/auth"
@@ -28,18 +29,18 @@ func (s *Server) SendFrame(w http.ResponseWriter, r *http.Request) {
 		log.Printf("Error to get prediction: %s\n", err)
 	}
 
-	count := spaceCounter.SpaceCounter.GetSpaceCount(prediction)
-	log.Println(count)
+	count, _ := spaceCounter.SpaceCounter.GetSpaceCount(prediction)
 
 	err = s.Database.SaveFrame(jsonReq.Id, count, jsonReq.Content)
 	if err != nil {
 		log.Printf("Error to insert frame: %s\n", err)
 	}
 
-	err = s.Database.UpdateFreeSpace(jsonReq.Id, []interface{}{})
-	if err != nil {
-		log.Printf("Error to insert frame: %s\n", err)
-	}
+	log.Println(count)
+	//err = s.Database.UpdateFreeSpace(jsonReq.Id, points)
+	//if err != nil {
+	//	log.Printf("Error to insert frame: %s\n", err)
+	//}
 }
 
 func (s *Server) Login(w http.ResponseWriter, r *http.Request) {
@@ -174,7 +175,7 @@ func (s *Server) GetUserInfo(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (s Server) SendEmail(w http.ResponseWriter, r *http.Request) {
+func (s *Server) SendEmail(w http.ResponseWriter, r *http.Request) {
 	body, closeFunc, err := tools.ReadRequestBodyJson(r, &model.EmailRequest{})
 	if err != nil {
 		log.Printf("Can`t read json body: %s", err)
@@ -185,13 +186,14 @@ func (s Server) SendEmail(w http.ResponseWriter, r *http.Request) {
 	jsonReq := body.(*model.EmailRequest)
 	defer closeFunc()
 
+	//log.Println(jsonReq)
 	if err := mail.Send(jsonReq.Email, jsonReq.ErrorCode, jsonReq.Comment); err != nil {
 		log.Printf("Error to send email: %s\n", err)
 		w.WriteHeader(http.StatusInternalServerError)
 	}
 }
 
-func (s Server) GetFreeSpace(w http.ResponseWriter, r *http.Request) {
+func (s *Server) GetFreeSpace(w http.ResponseWriter, r *http.Request) {
 	c, err := r.Cookie("token")
 	if err != nil {
 		if err == http.ErrNoCookie {
@@ -216,17 +218,11 @@ func (s Server) GetFreeSpace(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
-	response := model.FloatToSpacesResponse(responses)
-	log.Println(response)
 
-	//response := model.SpacesResponse{
-	//	Spaces: []model.Space{
-	//		{Lat: 55.655669, Long: 37.67832},
-	//		{Lat: 55.665669, Long: 37.66832},
-	//		{Lat: 55.675669, Long: 37.65832},
-	//	},
-	//	Totals: 3,
-	//}
+	response := model.SpacesResponse{
+		Spaces: responses,
+	}
+
 	jsonResp, err := json.Marshal(response)
 	if err != nil {
 		w.WriteHeader(500)
@@ -235,16 +231,38 @@ func (s Server) GetFreeSpace(w http.ResponseWriter, r *http.Request) {
 	w.Write(jsonResp)
 }
 
+func (s Server) SetPolygon(w http.ResponseWriter, r *http.Request) {
+	//body, closeFunc, err := tools.ReadRequestBodyJson(r, map[string]interface{}{})
+	//if err != nil {
+	//	log.Printf("Can`t read json body: %s", err)
+	//	w.WriteHeader(http.StatusBadRequest)
+	//	//return
+	//}
+
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		log.Printf("Error reading body: %v", err)
+		http.Error(w, "can't read body", http.StatusBadRequest)
+		return
+	}
+	log.Println(body)
+	//jsonReq := body.(map[string]interface{})
+	//defer closeFunc()
+
+	//fmt.Println(jsonReq)
+
+}
+
 func LoggingMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		uri := r.RequestURI
 		log.Println(uri)
 
-		//w.Header().Set("content-type", "application/json")
-		//w.Header().Set("Access-Control-Allow-Origin", "*")
-		//w.Header().Set("Access-Control-Allow-Credentials", "true")
-		//w.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token, token")
-		//w.Header().Set("Access-Control-Allow-Methods", "GET, POST")
+		w.Header().Set("content-type", "application/json")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Credentials", "true")
+		w.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token, token")
+		w.Header().Set("Access-Control-Allow-Methods", "GET, POST")
 
 		if uri == "/login" {
 			next.ServeHTTP(w, r)

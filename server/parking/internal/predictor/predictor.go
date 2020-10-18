@@ -41,7 +41,7 @@ func (p *Predictor) CarDetector(image string) (model.Prediction, error) {
 	client := pb.NewCarDetectorClient(conn)
 
 	imageGrpc := &pb.Image{Image: image}
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, _ := context.WithTimeout(context.Background(), 20*time.Second)
 
 	classes, err := client.Predict(ctx, imageGrpc)
 	if err != nil {

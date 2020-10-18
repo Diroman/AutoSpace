@@ -38,19 +38,33 @@ const (
                          WHEN litera IS NULL AND campus <> 0 THEN ', ' || cast(campus as VARCHAR)
                 END)                                    as address
 				FROM cams JOIN addresses a on a.id = cams.address_id;`
-	insertFrame = `UPDATE cams SET image = '%s', free_space = %v WHERE id = %v;`
+	insertFrame  = `UPDATE cams SET image = '%s', free_space = %v WHERE id = %v;`
 	getFreeSpace = `SELECT coord
 					FROM parking_fields
 					 JOIN cams c on c.id = parking_fields.cam_no
 					 JOIN users on c.address_id = users.address_id
 					WHERE users.id = %v;`
 	updateFreeSpace = `UPDATE parking_fields
-						SET coord = ARRAY [%s]
-						WHERE cam_no = (SELECT cams.id
+						SET coord = '{%s}'
+						WHERE cam_no IN (SELECT cams.id
 						FROM cams
 								 JOIN users u on cams.address_id = u.address_id
 						WHERE u.id = %v);`
-	//getUserInfo = ``
+	getCameraInfo = `SELECT hight, gps_coord_x, gps_coord_y, horizon_angle
+						FROM cams
+						WHERE id = %v;`
+	getCamerasSpace = `SELECT max(c.gps_coord_x) as lat,
+       max(c.gps_coord_y) as long,
+       max(c.free_space)  as free,
+       CASE
+           WHEN max(pf.coord) IS NOT NULL THEN array_length(max(pf.coord), 1)
+           ELSE 0
+           END            as total
+		FROM cams c
+         LEFT JOIN users on c.address_id = users.address_id
+         LEFT JOIN parking_fields pf on c.id = pf.cam_no
+		WHERE users.id = %v
+		GROUP BY c.id;`
 )
 
 type Database struct {
@@ -161,12 +175,12 @@ func (d Database) SaveFrame(id, count int, frame string) error {
 
 func (d Database) UpdateFreeSpace(id int, spaces []interface{}) error {
 	params := make([]string, 0, len(spaces))
-	for i := range spaces {
-		params = append(params, fmt.Sprintf("$%v", i+1))
+	for _, val := range spaces {
+		params = append(params, fmt.Sprintf("%v", val))
 	}
 
 	query := fmt.Sprintf(updateFreeSpace, strings.Join(params, ", "), id)
-	_, err := d.Conn.Exec(query, spaces...)
+	_, err := d.Conn.Exec(query)
 	if err != nil {
 		return err
 	}
@@ -174,8 +188,54 @@ func (d Database) UpdateFreeSpace(id int, spaces []interface{}) error {
 	return nil
 }
 
-func (d Database) GetParkingSpace(id int) ([]float64, error) {
-	query := fmt.Sprintf(getFreeSpace, id)
+func (d Database) GetCameraInfo(id int) (model.CameraInfo, error) {
+	query := fmt.Sprintf(getCameraInfo, id)
+	rows, err := d.Conn.Query(query)
+	if err != nil {
+		return model.CameraInfo{}, err
+	}
+
+	defer rows.Close()
+
+	has := rows.Next()
+	if !has {
+		return model.CameraInfo{}, NotFound
+	}
+
+	var camera model.CameraInfo
+	err = rows.Scan(&camera.Height, &camera.Latitude, &camera.Longitude, &camera.HorizonAngle)
+	if err != nil {
+		return model.CameraInfo{}, err
+	}
+
+	return camera, nil
+}
+
+//func (d Database) GetParkingSpace(id int) ([]float64, error) {
+//	query := fmt.Sprintf(getFreeSpace, id)
+//	rows, err := d.Conn.Query(query)
+//	if err != nil {
+//		return nil, err
+//	}
+//
+//	defer rows.Close()
+//
+//	has := rows.Next()
+//	if !has {
+//		return nil, NotFound
+//	}
+//
+//	var spaces []float64
+//	err = rows.Scan(&spaces)
+//	if err != nil {
+//		return nil, err
+//	}
+//
+//	return spaces, nil
+//}
+
+func (d Database) GetParkingSpace(id int) ([]model.Space, error) {
+	query := fmt.Sprintf(getCamerasSpace, id)
 	rows, err := d.Conn.Query(query)
 	if err != nil {
 		return nil, err
@@ -183,15 +243,15 @@ func (d Database) GetParkingSpace(id int) ([]float64, error) {
 
 	defer rows.Close()
 
-	has := rows.Next()
-	if !has {
-		return nil, NotFound
-	}
+	var spaces []model.Space
+	for rows.Next() {
+		space := model.Space{}
+		err = rows.Scan(&space.Lat, &space.Long, &space.Free, &space.Total)
+		if err != nil {
+			return nil, err
+		}
 
-	var spaces []float64
-	err = rows.Scan(&spaces)
-	if err != nil {
-		return nil, err
+		spaces = append(spaces, space)
 	}
 
 	return spaces, nil

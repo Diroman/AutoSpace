@@ -35,6 +35,7 @@ func NewServer(host string, port int, db *database.Database, predictor *predicto
 	r.HandleFunc("/get-frame", server.GetFrame)
 	r.HandleFunc("/get-free-space", server.GetFreeSpace)
 	r.HandleFunc("/send-email", server.SendEmail)
+	r.HandleFunc("/set-polygon", server.SetPolygon)
 
 	return server
 }

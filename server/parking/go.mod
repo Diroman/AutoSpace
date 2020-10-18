@@ -3,6 +3,8 @@ module parking
 go 1.15
 
 require (
+	github.com/JamesLMilner/pip-go v0.0.0-20180711171552-99c4cbbc7deb
+	github.com/JamesMilnerUK/pip-go v0.0.0-20180711171552-99c4cbbc7deb // indirect
 	github.com/cockroachdb/apd v1.1.0 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gofrs/uuid v3.3.0+incompatible // indirect
