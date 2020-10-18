@@ -110,37 +110,46 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
-                            <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fld-nY-WM6">
+                            <button opaque="NO" alpha="0.69999999999999996" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fld-nY-WM6">
                                 <rect key="frame" x="30" y="740" width="70" height="70"/>
-                                <color key="backgroundColor" red="0.8901960784313725" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Button" image="home"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="house"/>
                                 <connections>
                                     <action selector="findHome:" destination="0VR-vN-56B" eventType="touchUpInside" id="pTF-3z-d4H"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLG-hf-heI">
-                                <rect key="frame" x="30" y="60" width="70" height="70"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Rvl-53-VLX">
+                                <rect key="frame" x="139" y="680" width="136" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.8901960784313725" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Button" image="chat"/>
+                                <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                <state key="normal" title="Завершить маршрут">
+                                    <color key="titleColor" systemColor="systemRedColor"/>
+                                </state>
                                 <connections>
-                                    <action selector="openSupport:" destination="0VR-vN-56B" eventType="touchUpInside" id="G8o-yy-rao"/>
+                                    <action selector="finishRoute:" destination="0VR-vN-56B" eventType="touchUpInside" id="tov-cr-XdE"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Yc-4m-mJ1">
-                                <rect key="frame" x="320" y="60" width="70" height="70"/>
+                            <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Yc-4m-mJ1">
+                                <rect key="frame" x="320" y="70" width="70" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.8901960784313725" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Button" image="user"/>
+                                <state key="normal" image="profile"/>
                                 <connections>
                                     <action selector="openProfile:" destination="0VR-vN-56B" eventType="touchUpInside" id="TkH-xK-Reu"/>
                                     <segue destination="jgh-JU-qo3" kind="show" identifier="showProfile" id="gJi-bi-TgC"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLG-hf-heI">
+                                <rect key="frame" x="30" y="70" width="60" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="houume"/>
+                                <connections>
+                                    <action selector="openSupport:" destination="0VR-vN-56B" eventType="touchUpInside" id="G8o-yy-rao"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gbW-La-eRU">
                                 <rect key="frame" x="320" y="740" width="70" height="70"/>
-                                <color key="backgroundColor" red="0.8901960784313725" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Button" image="placeholder"/>
+                                <state key="normal" image="navigation"/>
                                 <connections>
                                     <action selector="findMe:" destination="0VR-vN-56B" eventType="touchUpInside" id="2SR-YM-Bfo"/>
                                 </connections>
@@ -150,17 +159,14 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="gbW-La-eRU" firstAttribute="width" secondItem="srw-5S-PE2" secondAttribute="width" multiplier="0.193237" constant="-10.000118000000001" id="9to-5W-efb"/>
-                            <constraint firstItem="Fld-nY-WM6" firstAttribute="height" secondItem="srw-5S-PE2" secondAttribute="height" multiplier="0.0977995" constant="-9.9999909999999943" id="Ora-m0-avK"/>
-                            <constraint firstItem="srw-5S-PE2" firstAttribute="bottom" secondItem="Fld-nY-WM6" secondAttribute="bottom" constant="52" id="RMv-Zq-yUl"/>
-                            <constraint firstItem="Fld-nY-WM6" firstAttribute="width" secondItem="srw-5S-PE2" secondAttribute="width" multiplier="0.193237" constant="-10.000118000000001" id="TCq-7k-ueN"/>
                             <constraint firstItem="srw-5S-PE2" firstAttribute="bottom" secondItem="gbW-La-eRU" secondAttribute="bottom" constant="52" id="TN9-97-t7g"/>
                             <constraint firstItem="srw-5S-PE2" firstAttribute="trailing" secondItem="gbW-La-eRU" secondAttribute="trailing" constant="24" id="YWA-QA-8nQ"/>
                             <constraint firstItem="gbW-La-eRU" firstAttribute="height" secondItem="srw-5S-PE2" secondAttribute="height" multiplier="0.0977995" constant="-9.9999909999999943" id="fQs-Le-VJD"/>
-                            <constraint firstItem="Fld-nY-WM6" firstAttribute="leading" secondItem="srw-5S-PE2" secondAttribute="leading" constant="30" id="lvE-KQ-jSF"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Y8F-xa-xl8"/>
                     <connections>
+                        <outlet property="finishRouteView" destination="Rvl-53-VLX" id="cR9-WM-SQl"/>
                         <outlet property="homeViewBut" destination="Fld-nY-WM6" id="Onw-7G-rgd"/>
                         <outlet property="locationViewBut" destination="gbW-La-eRU" id="zch-z3-OQb"/>
                         <outlet property="mapView" destination="33g-s6-WZm" id="xRU-KC-xun"/>
@@ -170,7 +176,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q0e-2Q-rC0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="322" y="74"/>
+            <point key="canvasLocation" x="321.73913043478262" y="73.660714285714278"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="aMg-aH-I18">
@@ -309,15 +315,18 @@
     </scenes>
     <resources>
         <image name="carSpot" width="100" height="100"/>
-        <image name="chat" width="511.99899291992188" height="511.99899291992188"/>
-        <image name="home" width="512" height="512"/>
-        <image name="placeholder" width="512" height="512"/>
-        <image name="user" width="512" height="512"/>
+        <image name="house" width="512" height="512"/>
+        <image name="houume" width="980" height="980"/>
+        <image name="navigation" width="60" height="60"/>
+        <image name="profile" width="60" height="60"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray3Color">
             <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiarySystemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -15,23 +15,37 @@ import SwiftyJSON
 
 class MapViewController: UIViewController, YMKMapCameraListener, YMKMapObjectTapListener, YMKUserLocationObjectListener {
     
+    @IBOutlet weak var finishRouteView: UIButton!
+    
     @IBOutlet weak var profileViewBut: UIButton!
     @IBOutlet weak var supportViewBut: UIButton!
     @IBOutlet weak var locationViewBut: UIButton!
     @IBOutlet weak var homeViewBut: UIButton!
     var drivingSession: YMKDrivingSession?
+    var route: YMKPolylineMapObject?
     
     func onMapObjectTap(with mapObject: YMKMapObject, point: YMKPoint) -> Bool {
-        print("grdyuyujdrsteyfgjhkjl")
+        let alert = UIAlertController(title: "Адрес", message: self.info?.user?.address, preferredStyle: .alert);
+        alert.view.backgroundColor = UIColor.darkGray;
+        alert.view.alpha = 0.8;
+        alert.view.layer.cornerRadius = 15;
+
+        self.present(alert, animated: true);
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+            alert.dismiss(animated: true);
+        }
         return true
     }
     
+    @IBAction func finishRoute(_ sender: UIButton) {
+        self.mapView?.mapWindow.map.mapObjects.remove(with: self.route!)
+        self.finishRouteView.isHidden = true
+    }
     
     @IBOutlet weak var mapView: YMKMapView?
     
     var info : ASRequest?
-    var mass = [[String : Any]]()
-    //let TARGET_LOCATION = YMKPoint(latitude: 59.945933, longitude: 30.320045)
+    
     let mapKit = YMKMapKit.sharedInstance()
 
     lazy var userLocationLayer = YMKMapKit.sharedInstance().createUserLocationLayer(with: (mapView?.mapWindow)!)
@@ -42,12 +56,12 @@ class MapViewController: UIViewController, YMKMapCameraListener, YMKMapObjectTap
     private var animationIsActive = true
     override func viewDidLoad() {
         super.viewDidLoad()
+        finishRouteView.isHidden = true
+        finishRouteView.titleLabel?.textAlignment = .center
+        finishRouteView.layer.cornerRadius = 5
+        finishRouteView.layer.borderWidth = 1
+        finishRouteView.layer.borderColor = UIColor.black.cgColor
         circleMapObjectTapListener = CircleMapObjectTapListener(controller: self);
-//        createTappableCircle(free: 0, total: 5, point: YMKPoint(latitude: 59.956, longitude: 30.323)).addTapListener(with: circleMapObjectTapListener);
-//        createTappableCircle(free: 5, total: 5, point: YMKPoint(latitude: 59.946, longitude: 30.333)).addTapListener(with: circleMapObjectTapListener);
-//        createTappableCircle(free: 1, total: 5, point: YMKPoint(latitude: 59.936, longitude: 30.343)).addTapListener(with: circleMapObjectTapListener);
-//        createTappableCircle(free: 0, total: 5, point: YMKPoint(latitude: 59.926, longitude: 30.353)).addTapListener(with: circleMapObjectTapListener);
-//        createTappableCircle(free: 3, total: 5, point: YMKPoint(latitude: 59.916, longitude: 30.363)).addTapListener(with: circleMapObjectTapListener);
 
         mapView?.mapWindow.map.move(with:
             YMKCameraPosition(target: YMKPoint(latitude: 0, longitude: 0), zoom: 14, azimuth: 0, tilt: 0))
@@ -69,7 +83,6 @@ class MapViewController: UIViewController, YMKMapCameraListener, YMKMapObjectTap
         let place = mapView?.mapWindow.map.mapObjects.addPlacemark(with: point, image: image!)
         place?.addTapListener(with: self)
         getSpots()
-//        mapView?.mapWindow.map.addTapListener(with: self)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -78,24 +91,7 @@ class MapViewController: UIViewController, YMKMapCameraListener, YMKMapObjectTap
     }
  
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        profileViewBut.layer.cornerRadius = 35
-        profileViewBut.layer.masksToBounds = true
-        profileViewBut.layer.borderWidth = 3
-        
-        supportViewBut.layer.cornerRadius = 35
-        supportViewBut.layer.masksToBounds = true
-        supportViewBut.layer.borderWidth = 3
-        
-        locationViewBut.layer.cornerRadius = 35
-        locationViewBut.layer.masksToBounds = true
-        locationViewBut.layer.borderWidth = 3
-        
-        homeViewBut.layer.cornerRadius = 35
-        homeViewBut.layer.masksToBounds = true
-        homeViewBut.layer.borderWidth = 3
-    }
+    
 
     @IBAction func openSupport(_ sender: UIButton) {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Map", bundle:nil)
@@ -136,13 +132,9 @@ class MapViewController: UIViewController, YMKMapCameraListener, YMKMapObjectTap
 
     }
     
-//    func onMapObjectTap(with mapObject: YMKMapObject, point: YMKPoint) -> Bool {
-//        print("drag")
-//        return true
-//    }
     
     func addPlacemarkListener(withPlacemarkListener placemarkListener: YMKSearchLayerTapHandler) {
-        print("hiiihiihihihi")
+
     }
     
     func onCameraPositionChanged(with map: YMKMap,
@@ -189,11 +181,10 @@ class MapViewController: UIViewController, YMKMapCameraListener, YMKMapObjectTap
     }
     
     func onObjectRemoved(with view: YMKUserLocationView) {
-        print("jhg")
     }
     
     func onObjectUpdated(with view: YMKUserLocationView, event: YMKObjectEvent) {
-        print("jh")
+//        self.getSpots()
     }
     
     
@@ -230,10 +221,6 @@ class MapViewController: UIViewController, YMKMapCameraListener, YMKMapObjectTap
         }
     }
 
-    @objc func getget(point: YMKPoint){
-        self.getRoute(point: point)
-    }
-    
     private class CircleMapObjectUserData {
         let id: Int32;
         let free: Int32;
@@ -262,7 +249,8 @@ class MapViewController: UIViewController, YMKMapCameraListener, YMKMapObjectTap
             fill: color)
         circle.zIndex = 100
         let image = UIImage(named: "spot")
-        self.mapView?.mapWindow.map.mapObjects.addPlacemark(with: point, image: image!)
+        let parking = self.mapView?.mapWindow.map.mapObjects.addPlacemark(with: point, image: image!)
+        parking?.zIndex = 100
         circle.userData = CircleMapObjectUserData(id: 1, free: free, total: total, coor: coor);
         return circle
     }
@@ -289,12 +277,13 @@ class MapViewController: UIViewController, YMKMapCameraListener, YMKMapObjectTap
             drivingOptions: YMKDrivingDrivingOptions(),
             vehicleOptions: YMKDrivingVehicleOptions(),
             routeHandler: responseHandler)
+        self.finishRouteView.isHidden = false
     }
             
     func onRoutesReceived(_ routes: [YMKDrivingRoute]) {
         let mapObjects = mapView?.mapWindow.map.mapObjects
         if routes.count > 0 {
-            mapObjects!.addPolyline(with: routes[0].geometry)
+            self.route = mapObjects!.addPolyline(with: routes[0].geometry)
         }
     }
             
@@ -314,7 +303,6 @@ class MapViewController: UIViewController, YMKMapCameraListener, YMKMapObjectTap
     }
     
     func getSpots(){
-        self.mass.removeAll()
         AF.request(Constant.getSpotsURL, method: .post).responseJSON(completionHandler: { [weak self] response in
             do{
                 if (0200...299).contains(response.response?.statusCode ?? 0){
@@ -322,13 +310,12 @@ class MapViewController: UIViewController, YMKMapCameraListener, YMKMapObjectTap
                     for i in json["spaces"]{
                         
                         self!.createTappableCircle(free: i.1["free"].int32!, total: i.1["total"].int32!, point: YMKPoint(latitude: i.1["lat"].double!, longitude: i.1["long"].double!)).addTapListener(with: self!.circleMapObjectTapListener);
-//                        self?.mass.append(["lat": i.1["lat"].double, "long": i.1["long"].double, "free": i.1["free"].int, "total": i.1["total"].int])
                     }
                     
                 }
 
             } catch {
-                print("df")
+                print("Error")
             }
             
         }).resume()
