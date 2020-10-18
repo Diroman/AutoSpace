@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import {CameraCard} from "./CameraCard";
-import {fetchData} from "../common/helpers/fetchData";
 import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
@@ -14,10 +13,9 @@ const useStyles = makeStyles(theme => ({
         paddingLeft: theme.spacing(6),
         paddingBottom: theme.spacing(3),
         paddingTop: theme.spacing(3),
-    },
-    news: {
-        width: '100%',
-        paddingBottom: theme.spacing(3),
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     productCard: {
         height: '100%',
@@ -40,7 +38,10 @@ export const CameraTable = () => {
         axios.get(`http://192.168.31.44:8080/all-cameras`)
             .then(res => {
                 const data = res.data.cameras;
-                setData(data);
+                const sort_data = data.sort(function(a, b) {
+                    return a.id - b.id;
+                });
+                setData(sort_data);
             })
 
     },[]);
@@ -48,13 +49,11 @@ export const CameraTable = () => {
     return (
         <Grid container className={classes.root}>
             {data && data.map((item, index) =>
-                <Box key={index} className={classes.news}>
                     <CameraCard
                         index={item.id}
                         className={classes.productCard}
                         address={item.address}
                         key={item.id}/>
-                </Box>
             )}
         </Grid>
     );

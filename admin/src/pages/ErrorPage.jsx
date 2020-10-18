@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        backgroundColor: theme.palette.type === 'light' ? theme.palette.primary.light : theme.palette.background.paper,
+        backgroundColor: '#eeeeee',
 
     },
 }));
@@ -15,7 +15,7 @@ const ErrorPage = () => {
     const classes = useStyles();
 
     React.useEffect(() => {
-        document.title = 'Кафедра 42 НИЯУ МИФИ | Error 404 Not found';
+        document.title = 'Error 404 Not found';
     });
 
     return (

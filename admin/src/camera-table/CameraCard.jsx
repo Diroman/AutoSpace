@@ -7,8 +7,10 @@ import {Link} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
     root: {
+        width: '350px',
         display: 'flex',
         flexDirection: 'column',
+        marginRight: theme.spacing(2),
     },
     statsItem: {
         alignItems: 'center',
@@ -18,6 +20,15 @@ const useStyles = makeStyles(theme => ({
         marginRight: theme.spacing(1),
         color: theme.palette.primary.main,
     },
+    button:{
+        backgroundColor: theme.palette.action.active,
+        color: 'white',
+        '&:hover': {
+            backgroundColor: theme.palette.action.active,
+            color: '#fafafa',
+        },
+    }
+
 }));
 
 export const CameraCard = ({ address, index, className, ...rest }) => {
@@ -49,7 +60,7 @@ export const CameraCard = ({ address, index, className, ...rest }) => {
             </CardContent>
             <Divider />
             <CardActions>
-                <Button size="small" variant='contained' component={Link} to={`/admin/parking/tool/${index}`}>
+                <Button size="small" className={classes.button} variant='contained' component={Link} to={`/admin/parking/tool/${index}`}>
                     Просмотреть
                 </Button>
             </CardActions>
