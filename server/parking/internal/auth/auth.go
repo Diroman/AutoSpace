@@ -2,18 +2,19 @@ package auth
 
 import (
 	"github.com/dgrijalva/jwt-go"
-	"math"
 	"net/http"
+	"strconv"
+	"time"
 )
 
-const jwtKey = "super(secret_token)key"
+const jwtKey = "secret"
 
 func CreateNewToken(id int) (string, error) {
 	claims := &Claims{
-		ID: id,
+		ID: strconv.Itoa(id),
 		StandardClaims: jwt.StandardClaims{
 			// In JWT, the expiry time is expressed as unix milliseconds
-			ExpiresAt: math.MaxInt64,
+			ExpiresAt: time.Now().Add(5*time.Hour).Unix(),
 		},
 	}
 
@@ -42,5 +43,6 @@ func ParseToken(token string) (int, bool) {
 		return http.StatusUnauthorized, false
 	}
 
-	return 0, true
+	id, _ := strconv.Atoi(claims.ID)
+	return id, true
 }

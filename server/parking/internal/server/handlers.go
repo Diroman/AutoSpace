@@ -5,9 +5,11 @@ import (
 	"log"
 	"net/http"
 	"parking/internal/auth"
+	"parking/internal/mail"
 	"parking/internal/spaceCounter"
 	"parking/internal/tools"
 	"parking/model"
+	"time"
 )
 
 func (s *Server) SendFrame(w http.ResponseWriter, r *http.Request) {
@@ -26,9 +28,18 @@ func (s *Server) SendFrame(w http.ResponseWriter, r *http.Request) {
 		log.Printf("Error to get prediction: %s\n", err)
 	}
 
-	log.Println(prediction)
+	count := spaceCounter.SpaceCounter.GetSpaceCount(prediction)
+	log.Println(count)
 
-	log.Println(spaceCounter.SpaceCounter.GetSpaceCount(prediction))
+	err = s.Database.SaveFrame(jsonReq.Id, count, jsonReq.Content)
+	if err != nil {
+		log.Printf("Error to insert frame: %s\n", err)
+	}
+
+	err = s.Database.UpdateFreeSpace(jsonReq.Id, []interface{}{})
+	if err != nil {
+		log.Printf("Error to insert frame: %s\n", err)
+	}
 }
 
 func (s *Server) Login(w http.ResponseWriter, r *http.Request) {
@@ -90,6 +101,137 @@ func (s *Server) Login(w http.ResponseWriter, r *http.Request) {
 		w.Write(jsonResp)
 	}
 
+	s.setTokenInCookie(w, user.Token)
+	w.Write(jsonResp)
+}
+
+func (s *Server) setTokenInCookie(w http.ResponseWriter, token string) {
+	cookie := http.Cookie{
+		Name:    "token",
+		Value:   token,
+		Expires: time.Now().Add(3 * time.Hour),
+	}
+	http.SetCookie(w, &cookie)
+}
+
+func (s *Server) GetFrame(w http.ResponseWriter, r *http.Request) {
+	body, closeFunc, err := tools.ReadRequestBodyJson(r, &model.FrameRequest{})
+	if err != nil {
+		log.Printf("Can`t read json body: %s", err)
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	jsonReq := body.(*model.FrameRequest)
+	defer closeFunc()
+
+	frame, err := s.Database.GetFrame(jsonReq.Id)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+	}
+
+	response := model.FrameResponse{
+		Image: frame,
+	}
+	jsonResp, err := json.Marshal(response)
+	if err != nil {
+		w.Write(jsonResp)
+	}
+
+	w.Write(jsonResp)
+}
+
+func (s *Server) GetCameras(w http.ResponseWriter, r *http.Request) {
+	cameras, err := s.Database.GetAllCameras()
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+	}
+
+	jsonResp, err := json.Marshal(cameras)
+	if err != nil {
+		w.WriteHeader(500)
+	}
+
+	w.Write(jsonResp)
+}
+
+func (s *Server) GetUserInfo(w http.ResponseWriter, r *http.Request) {
+	c, err := r.Cookie("token")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	token := c.Value
+	code, ok := auth.ParseToken(token)
+	if !ok {
+		w.WriteHeader(code)
+		return
+	}
+}
+
+func (s Server) SendEmail(w http.ResponseWriter, r *http.Request) {
+	body, closeFunc, err := tools.ReadRequestBodyJson(r, &model.EmailRequest{})
+	if err != nil {
+		log.Printf("Can`t read json body: %s", err)
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	jsonReq := body.(*model.EmailRequest)
+	defer closeFunc()
+
+	if err := mail.Send(jsonReq.Email, jsonReq.ErrorCode, jsonReq.Comment); err != nil {
+		log.Printf("Error to send email: %s\n", err)
+		w.WriteHeader(http.StatusInternalServerError)
+	}
+}
+
+func (s Server) GetFreeSpace(w http.ResponseWriter, r *http.Request) {
+	c, err := r.Cookie("token")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	token := c.Value
+	id, ok := auth.ParseToken(token)
+	if ok {
+		w.WriteHeader(id)
+		return
+	}
+
+	id = 1
+
+	responses, err := s.Database.GetParkingSpace(id)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	response := model.FloatToSpacesResponse(responses)
+	log.Println(response)
+
+	//response := model.SpacesResponse{
+	//	Spaces: []model.Space{
+	//		{Lat: 55.655669, Long: 37.67832},
+	//		{Lat: 55.665669, Long: 37.66832},
+	//		{Lat: 55.675669, Long: 37.65832},
+	//	},
+	//	Totals: 3,
+	//}
+	jsonResp, err := json.Marshal(response)
+	if err != nil {
+		w.WriteHeader(500)
+	}
+
 	w.Write(jsonResp)
 }
 
@@ -97,6 +239,12 @@ func LoggingMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		uri := r.RequestURI
 		log.Println(uri)
+
+		//w.Header().Set("content-type", "application/json")
+		//w.Header().Set("Access-Control-Allow-Origin", "*")
+		//w.Header().Set("Access-Control-Allow-Credentials", "true")
+		//w.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token, token")
+		//w.Header().Set("Access-Control-Allow-Methods", "GET, POST")
 
 		if uri == "/login" {
 			next.ServeHTTP(w, r)

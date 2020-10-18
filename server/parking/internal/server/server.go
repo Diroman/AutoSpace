@@ -31,6 +31,10 @@ func NewServer(host string, port int, db *database.Database, predictor *predicto
 	r.Use(LoggingMiddleware)
 	r.HandleFunc("/send-frame", server.SendFrame)
 	r.HandleFunc("/login", server.Login)
+	r.HandleFunc("/all-cameras", server.GetCameras)
+	r.HandleFunc("/get-frame", server.GetFrame)
+	r.HandleFunc("/get-free-space", server.GetFreeSpace)
+	r.HandleFunc("/send-email", server.SendEmail)
 
 	return server
 }
