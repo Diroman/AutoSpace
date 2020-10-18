@@ -12,15 +12,19 @@ class MainModel {
     
     let network = NetworkService()
     
-    func checkAuth(login: String, password: String) -> Promise<Bool>{
+    func checkAuth(login: String, password: String) -> Promise<ASRequest>{
         return Promise{ promise in
-        var res = false
+        //var res = false
+        Constant.parameters["login"] = login
+        Constant.parameters["password"] = password
         network.getJson(url: Constant.authURL).done({ (data) in
             switch data.code{
             case .access:
-                promise.fulfill(true)
+                promise.fulfill(data)
             case .error:
-                promise.fulfill(false)
+                promise.fulfill(data)
+            case .none:
+                promise.fulfill(data)
             }
         }).catch { (error) in
             promise.reject(error)

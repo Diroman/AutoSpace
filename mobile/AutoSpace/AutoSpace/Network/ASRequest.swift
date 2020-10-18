@@ -20,8 +20,9 @@ enum ErrorType{
 }
 
 struct ASRequest {
-    var code : ASRequestType
+    var code : ASRequestType?
     var data : Data?
     var error : ErrorType?
     var json : JSON?
+    var user : User?
 }

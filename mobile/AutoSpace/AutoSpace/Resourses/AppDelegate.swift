@@ -6,14 +6,19 @@
 //
 
 import UIKit
+import YandexMapsMobile
+import IQKeyboardManagerSwift
 
-@main
+@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    let MAPKIT_API_KEY = "e8acf97a-4fcd-4c9c-91f9-c7f155b2724d"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        YMKMapKit.setApiKey(MAPKIT_API_KEY)
+
+        YMKMapKit.setLocale("ru_RU")
+        IQKeyboardManager.shared.enable = true
         return true
     }
 
